@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  api:
+    build: ./app/api
+    container_name: shave-api
+    restart: always
+    command: bash -c "npm run db:init && npm run db:populate && npm run dev"
+    env_file:
+      - .env
+    ports:
+      - 3333:3333
+    depends_on:
+      - db
+    networks:
+      - shave-net
+
+  web:
+    build: ./app/web
+    container_name: shave-web
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - api
+    networks:
+      - shave-net
+
+  db: 
+    image: postgres:latest
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: shave
+    ports:
+      - 5432:5432
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    networks:
+      - shave-net
+
+volumes:
+  db_volume:
+    driver: local
+
+networks:
+  shave-net:
