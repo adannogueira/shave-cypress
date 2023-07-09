@@ -59,10 +59,6 @@ class SeedUsers1588957767415 {
       is_shaver: true,
       avatar: 'jeremy.png',
       level: 'Expert'
-    }, {
-      name: 'Test User',
-      email: 'test-user@mail.com',
-      password: passTest
     }];
     await (0, _typeorm.getRepository)('users').save(shavers);
   }
