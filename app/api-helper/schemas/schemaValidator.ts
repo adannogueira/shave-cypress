@@ -4,7 +4,7 @@ import { AnyZodObject, ZodError } from 'zod'
 export const schemaValidator = (schema: AnyZodObject) =>
   (request: Request, response: Response, next: NextFunction) => {
     try {
-      schema.parse(request.body)
+      schema.parse({ ...request.body, ...request.params })
       return next()
     } catch (error) {
       if (error instanceof ZodError) {
