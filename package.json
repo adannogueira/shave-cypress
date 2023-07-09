@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "up": "docker-compose up --detach",
+    "up": "docker-compose up --build --detach",
     "down": "docker-compose down",
     "start": "npm run up && npx cypress open"
   },
