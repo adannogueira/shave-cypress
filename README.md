@@ -50,6 +50,23 @@ emails.forEach(email => {
 })      
 ```
 
+#### Utilização de checkpoints durante a navegação
+Alguns cenários podem exigir uma navegação longa até atingirem o objetivo final, ter que esperar o final do cenário para então receber um aviso de erro pode ser demorado e custoso. Para evitar este tipo de problema, é aconselhável realizar checkpoints durante o processo.
+
+Checkpoints nada mais são do que verificações em determinados pontos da execução do cenário, afim de garantir que o caminho está dentro do esperado, um bug pode ser encontrado mais cedo na execução, fazendo o cenário falhar mais rápido.
+
+Por exemplo:
+```typescript
+ static open() {
+    // navegação executada
+    cy.visit(ForgotPasswordPage.url)
+
+    // checkpoint que verifica se a página visitada acima é a esperada
+    cy.get('form h1')
+      .should('have.text', 'Recuperar senha')
+  }
+```
+
 ## Tech
 
 Este projeto utiliza as seguintes tecnologias:
