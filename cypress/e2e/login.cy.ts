@@ -1,39 +1,39 @@
+import { usersLoginFixture } from '../fixtures/usersLogin'
 import { LoginPage } from '../support/pages/login'
 import { ShaversPage } from '../support/pages/shavers'
 import { faker } from '@faker-js/faker'
 
 describe('Login', () => {
+  const { email, name, password } = usersLoginFixture
+
   context('when form is submitted', () => {
-    const correctEmail = 'test-user@mail.com'
-    const correctPassword = 't3st-pa$$'
-    const correctName = 'Test'
     it('should login with correct email and password', () => {
-      LoginPage.submit({ email: correctEmail, password: correctPassword })
-      ShaversPage.header.assertUserIsLogged({ name: correctName })
+      LoginPage.submit({ email, password })
+      ShaversPage.header.assertUserIsLogged({ name })
     })
 
     context('with invalid data', () => {
       it('should not login with incorrect password', () => {
         const error = 'Ocorreu um erro ao fazer login, verifique suas credenciais.'
-        LoginPage.submit({ email: correctEmail, password: faker.internet.password() })
+        LoginPage.submit({ email, password: faker.internet.password() })
         LoginPage.assertInvalidDataLoginError({ error })
       })
   
       it('should not login with unregistered email', () => {
         const error = 'Ocorreu um erro ao fazer login, verifique suas credenciais.'
-        LoginPage.submit({ email: faker.internet.email(), password: correctPassword })
+        LoginPage.submit({ email: faker.internet.email(), password })
         LoginPage.assertInvalidDataLoginError({ error })
       })
   
       it('should not login when email is not informed', () => {
         const error = 'E-mail é obrigatório'
-        LoginPage.submit({ password: correctPassword })
+        LoginPage.submit({ password })
         LoginPage.assertAlertErrorMessage({ error })
       })
   
       it('should not login when password is not informed', () => {
         const error = 'Senha é obrigatória'
-        LoginPage.submit({ email: correctEmail })
+        LoginPage.submit({ email })
         LoginPage.assertAlertErrorMessage({ error })
       })
     })
@@ -47,7 +47,7 @@ describe('Login', () => {
       
       passwords.forEach(password => {
         it(`case: password has only ${password.length} digits`, () => {
-          LoginPage.submit({ email: correctEmail, password })
+          LoginPage.submit({ email, password })
           LoginPage.assertAlertErrorMessage({ error })
         })
       })
@@ -59,7 +59,7 @@ describe('Login', () => {
 
       emails.forEach(email => {
         it(`case: ${email}`, () => {
-          LoginPage.submit({ email, password: correctPassword })
+          LoginPage.submit({ email, password })
           LoginPage.assertAlertErrorMessage({ error })
         })
       })      
