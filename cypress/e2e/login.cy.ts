@@ -8,6 +8,7 @@ describe('Login', () => {
 
   context('when form is submitted', () => {
     it('should login with correct email and password', () => {
+      cy.createUser(usersLoginFixture)
       LoginPage.submit({ email, password })
       ShaversPage.header.assertUserIsLogged({ name })
     })
