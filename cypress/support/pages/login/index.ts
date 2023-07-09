@@ -1,5 +1,6 @@
 export class LoginPage {
   static url = '/'
+
   static submit({ email = null, password = null }: LoginParams = {}) {
     cy.visit(LoginPage.url)
     cy.get('input[placeholder$=email]').as('email')
@@ -19,6 +20,11 @@ export class LoginPage {
   static assertAlertErrorMessage({ error }: { error: string }) {
     cy.contains('.alert-error', error)
       .should('be.visible')
+  }
+
+  static forgotPassword() {
+    cy.visit(LoginPage.url)
+    cy.get('.forgot-password').click()
   }
 }
 

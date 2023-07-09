@@ -1,6 +1,8 @@
+import { faker } from '@faker-js/faker';
+
 export const usersLoginFixture = {
-  name: 'Test',
-  email: 'test-user@mail.com',
-  password: 't3st-pa$$',
+  name: faker.person.firstName(),
+  email: faker.internet.email(),
+  password: faker.internet.password(),
   isShaver: false
 }
