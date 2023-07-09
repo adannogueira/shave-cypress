@@ -42,6 +42,19 @@ services:
     networks:
       - shave-net
 
+  api_helper:
+    build: ./app/api-helper
+    container_name: shave-api-helper
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+    networks:
+      - shave-net
+
 volumes:
   db_volume:
     driver: local
