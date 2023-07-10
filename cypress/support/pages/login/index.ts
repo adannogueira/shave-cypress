@@ -22,9 +22,20 @@ export class LoginPage {
       .should('be.visible')
   }
 
+  static assertIsLoginPage() {
+    cy.contains('h1', 'Faça seu login')
+      .should('be.visible')
+  }
+
   static forgotPassword() {
     cy.visit(LoginPage.url)
     cy.get('.forgot-password').click()
+  }
+
+  static signUp() {
+    cy.visit(LoginPage.url)
+    cy.get('.signup')
+      .click()
   }
 }
 
