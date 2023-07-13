@@ -57,15 +57,36 @@ Checkpoints nada mais são do que verificações em determinados pontos da execu
 
 Por exemplo:
 ```typescript
- static open() {
-    // navegação executada
-    cy.visit(ForgotPasswordPage.url)
+static open() {
+  // navegação executada
+  cy.visit(ForgotPasswordPage.url)
 
-    // checkpoint que verifica se a página visitada acima é a esperada
-    cy.get('form h1')
-      .should('have.text', 'Recuperar senha')
-  }
+  // checkpoint que verifica se a página visitada acima é a esperada
+  cy.get('form h1')
+    .should('have.text', 'Recuperar senha')
+}
 ```
+
+#### Executando acesso direto ao backend pra ganhar performance
+Existem etapas que precisam ser executadas como preparação em diversos cenários, como login do usuário por exemplo.
+Uma vez que o login tenha sido testado em sua própria suite, não há necessidade de executar toda vez o processo inteiro, isso deixa seus testes lentos e repetitivos.
+Pra evitar esse problema, podemos criar comandos que fazem a chamada direta ao backend e nos devolve apenas os dados necessários, pulando todo o processo de login padrão:
+
+```typescript
+export const apiLogin = ({ email, password }: application.User) => {
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('APP_API_URL')}/sessions`,
+    body: { email, password }
+  }).then(response => {
+    expect(response.status).to.eql(200)
+    const { user, token } = response.body
+    window.localStorage.setItem('@ShaveXP:user', JSON.stringify(user))
+    window.localStorage.setItem('@ShaveXP:token', token)
+  })
+}
+```
+No exemplo acima, criamos um `Cypress.Command` que executa login via api, o que ele faz é chamar o backend na rota de sessão do usuário e depois atribuir os dados recebido ao `localStorage`, tudo isso sem nenhuma interação com os elementos da tela.
 
 ## Tech
 
