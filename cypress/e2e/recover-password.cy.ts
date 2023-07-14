@@ -1,8 +1,8 @@
-import { loginPage } from '../support/pages/login'
-import { forgotPasswordPage } from '../support/pages/forgot-password'
+import { loginPage } from '../support/pages/views/login'
+import { forgotPasswordPage } from '../support/pages/views/forgot-password'
 import { usersLoginFixture } from '../fixtures/usersLogin'
-import { resetPasswordPage } from '../support/pages/reset-password'
-import { shaversPage } from '../support/pages/shavers'
+import { resetPasswordPage } from '../support/pages/views/reset-password'
+import { shaversPage } from '../support/pages/views/shavers'
 import { faker } from '@faker-js/faker'
 
 describe('Recover Password', () => {

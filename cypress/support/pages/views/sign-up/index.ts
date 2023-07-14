@@ -1,4 +1,4 @@
-import { SharedItems } from '../shared'
+import { SharedItems } from '../../shared'
 
 export const signUpPage = {
   ...SharedItems,

@@ -1,6 +1,6 @@
 import { usersLoginFixture } from '../fixtures/usersLogin'
-import { loginPage } from '../support/pages/login'
-import { shaversPage } from '../support/pages/shavers'
+import { loginPage } from '../support/pages/views/login'
+import { shaversPage } from '../support/pages/views/shavers'
 import { faker } from '@faker-js/faker'
 
 describe('Login', () => {

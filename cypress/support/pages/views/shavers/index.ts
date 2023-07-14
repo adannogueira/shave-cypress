@@ -1,5 +1,5 @@
 import { Header } from '../../components/header';
-import { SharedItems } from '../shared';
+import { SharedItems } from '../../shared';
 
 export const shaversPage = {
   ...SharedItems,

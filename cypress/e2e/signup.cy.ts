@@ -1,7 +1,7 @@
-import { loginPage } from '../support/pages/login'
+import { loginPage } from '../support/pages/views/login'
 import { usersLoginFixture } from '../fixtures/usersLogin'
 import { faker } from '@faker-js/faker'
-import { signUpPage } from '../support/pages/sign-up'
+import { signUpPage } from '../support/pages/views/sign-up'
 
 describe('SignUp', () => {
   const { email, name, password } = usersLoginFixture

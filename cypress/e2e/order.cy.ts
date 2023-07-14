@@ -1,7 +1,7 @@
 import { customerFixture, serviceFixture, shaverFixture } from '../fixtures/orderPlacement'
-import { catalogPage } from '../support/pages/catalog'
-import { orderPage } from '../support/pages/order'
-import { shaversPage } from '../support/pages/shavers'
+import { catalogPage } from '../support/pages/views/catalog'
+import { orderPage } from '../support/pages/views/order'
+import { shaversPage } from '../support/pages/views/shavers'
 
 describe('Orders', () => {
   context('given user is logged in', () => {
