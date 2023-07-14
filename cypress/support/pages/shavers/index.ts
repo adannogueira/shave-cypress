@@ -1,14 +1,12 @@
 import { Header } from '../../components/header';
+import { SharedItems } from '../shared';
 
-export class ShaversPage {
-  static url = '/shavers'
-  static header = Header
-
-  static open() {
-    cy.visit(ShaversPage.url)
-  }
+export const shaversPage = {
+  ...SharedItems,
+  url: '/shavers',
+  header: Header,
   
-  static pickShaver({ name }: { name: string }) {
+  pickShaver({ name }: { name: string }) {
     cy.log(name)
       cy.contains('figcaption h3', name)
         .click()

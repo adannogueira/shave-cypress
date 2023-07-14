@@ -1,6 +1,6 @@
 import { usersLoginFixture } from '../fixtures/usersLogin'
-import { LoginPage } from '../support/pages/login'
-import { ShaversPage } from '../support/pages/shavers'
+import { loginPage } from '../support/pages/login'
+import { shaversPage } from '../support/pages/shavers'
 import { faker } from '@faker-js/faker'
 
 describe('Login', () => {
@@ -9,33 +9,33 @@ describe('Login', () => {
   context('when form is submitted', () => {
     it('should login with correct email and password', () => {
       cy.createUser(usersLoginFixture)
-      LoginPage.submit({ email, password })
-      ShaversPage.header.assertUserIsLogged({ name })
+      loginPage.submit({ email, password })
+      shaversPage.header.assertUserIsLogged({ name })
     })
 
     context('with invalid data', () => {
       it('should not login with incorrect password', () => {
         const error = 'Ocorreu um erro ao fazer login, verifique suas credenciais.'
-        LoginPage.submit({ email, password: faker.internet.password() })
-        LoginPage.assertInvalidDataLoginError({ error })
+        loginPage.submit({ email, password: faker.internet.password() })
+        loginPage.assertInvalidDataLoginError({ error })
       })
   
       it('should not login with unregistered email', () => {
         const error = 'Ocorreu um erro ao fazer login, verifique suas credenciais.'
-        LoginPage.submit({ email: faker.internet.email(), password })
-        LoginPage.assertInvalidDataLoginError({ error })
+        loginPage.submit({ email: faker.internet.email(), password })
+        loginPage.assertInvalidDataLoginError({ error })
       })
   
       it('should not login when email is not informed', () => {
         const error = 'E-mail é obrigatório'
-        LoginPage.submit({ password })
-        LoginPage.assertAlertErrorMessage({ error })
+        loginPage.submit({ password })
+        loginPage.assertAlertErrorMessage({ error })
       })
   
       it('should not login when password is not informed', () => {
         const error = 'Senha é obrigatória'
-        LoginPage.submit({ email })
-        LoginPage.assertAlertErrorMessage({ error })
+        loginPage.submit({ email })
+        loginPage.assertAlertErrorMessage({ error })
       })
     })
 
@@ -48,8 +48,8 @@ describe('Login', () => {
       
       passwords.forEach(password => {
         it(`case: password has only ${password.length} digits`, () => {
-          LoginPage.submit({ email, password })
-          LoginPage.assertAlertErrorMessage({ error })
+          loginPage.submit({ email, password })
+          loginPage.assertAlertErrorMessage({ error })
         })
       })
     })
@@ -60,8 +60,8 @@ describe('Login', () => {
 
       emails.forEach(email => {
         it(`case: ${email}`, () => {
-          LoginPage.submit({ email, password })
-          LoginPage.assertAlertErrorMessage({ error })
+          loginPage.submit({ email, password })
+          loginPage.assertAlertErrorMessage({ error })
         })
       })      
     })

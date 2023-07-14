@@ -1,13 +1,16 @@
-export class ResetPasswordPage {
-  static url = '/reset-password'
+import { SharedItems } from '../shared'
 
-  static open({ token }: { token: string }) {
-    cy.visit(`${ResetPasswordPage.url}?token=${token}`)
+export const resetPasswordPage = {
+  ...SharedItems,
+  url: '/reset-password',
+
+  open({ token }: { token: string }) {
+    cy.visit(`${this.url}?token=${token}`)
     cy.get('form h1')
       .should('have.text', 'Resetar senha')
-  }
+  },
 
-  static submit({
+  submit({
     newPassword,
     confirmation
   }: { newPassword: string, confirmation: string }
@@ -20,11 +23,5 @@ export class ResetPasswordPage {
 
     cy.contains('button', 'Alterar senha')
       .click()
-  }
-
-  static assertNotice({ message }: { message: string }) {
-    cy.get('.notice p', { timeout: 10000 })
-      .should('be.visible')
-      .should('have.text', message)
   }
 }

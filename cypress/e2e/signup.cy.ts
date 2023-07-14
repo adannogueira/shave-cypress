@@ -1,28 +1,28 @@
-import { LoginPage } from '../support/pages/login'
+import { loginPage } from '../support/pages/login'
 import { usersLoginFixture } from '../fixtures/usersLogin'
 import { faker } from '@faker-js/faker'
-import { SignUpPage } from '../support/pages/sign-up'
+import { signUpPage } from '../support/pages/sign-up'
 
 describe('SignUp', () => {
   const { email, name, password } = usersLoginFixture
 
   it('should show sign up screen when "Criar conta" is clicked', () => {
-    LoginPage.signUp()
-    SignUpPage.assertIsSignUpPage()
+    loginPage.signUp()
+    signUpPage.assertIsSignUpPage()
   })
 
   context('when form is submitted', () => {
     it('should create a new account', () => {
       const message = 'Boas vindas, faça login para solicitar serviços!'
-      SignUpPage.submit({ email, name, password })
-      SignUpPage.assertNotice({ message })
+      signUpPage.submit({ email, name, password })
+      signUpPage.assertNotice({ message })
     })
 
     it('should not create a new account when email is already registered', () => {
       cy.createUser(usersLoginFixture)
       const message = 'Oops! E-mail já cadastrado.'
-      SignUpPage.submit({ email, name, password })
-      SignUpPage.assertNotice({ message })
+      signUpPage.submit({ email, name, password })
+      signUpPage.assertNotice({ message })
     })
 
     context('and there are blank fields', () => {
@@ -44,8 +44,8 @@ describe('SignUp', () => {
       fields.forEach(({ field, message }) => {
         it(`should not create a new account when ${field} is empty`, () => {
           const userData = { ...usersLoginFixture, [field]: undefined }
-          SignUpPage.submit(userData)
-          SignUpPage.assertAlertErrorMessage({ error: message })
+          signUpPage.submit(userData)
+          signUpPage.assertAlertErrorMessage({ error: message })
         })
       })
     })
@@ -59,8 +59,8 @@ describe('SignUp', () => {
       
       passwords.forEach(password => {
         it(`should not accept password with only ${password.length} digits`, () => {
-          SignUpPage.submit({ name, email, password })
-          SignUpPage.assertAlertErrorMessage({ error })
+          signUpPage.submit({ name, email, password })
+          signUpPage.assertAlertErrorMessage({ error })
         })
       })
     })
@@ -71,16 +71,16 @@ describe('SignUp', () => {
 
       emails.forEach(email => {
         it(`should not accept ${email} as a valid email`, () => {
-          SignUpPage.submit({ name, email, password })
-          SignUpPage.assertAlertErrorMessage({ error })
+          signUpPage.submit({ name, email, password })
+          signUpPage.assertAlertErrorMessage({ error })
         })
       })      
     })
   })
 
   it('should return to login page when "Voltar para login" is clicked', () => {
-    SignUpPage.open()
-    SignUpPage.backToLogin()
-    LoginPage.assertIsLoginPage()
+    signUpPage.open()
+    signUpPage.backToLogin()
+    loginPage.assertIsLoginPage()
   })
 })

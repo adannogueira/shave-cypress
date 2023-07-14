@@ -1,16 +1,16 @@
-import { LoginPage } from '../support/pages/login'
-import { ForgotPasswordPage } from '../support/pages/forgot-password'
+import { loginPage } from '../support/pages/login'
+import { forgotPasswordPage } from '../support/pages/forgot-password'
 import { usersLoginFixture } from '../fixtures/usersLogin'
-import { ResetPasswordPage } from '../support/pages/reset-password'
-import { ShaversPage } from '../support/pages/shavers'
+import { resetPasswordPage } from '../support/pages/reset-password'
+import { shaversPage } from '../support/pages/shavers'
 import { faker } from '@faker-js/faker'
 
 describe('Recover Password', () => {
   const { email, name } = usersLoginFixture
 
   it('should show recovery screen when "Esqueci minha senha" is clicked', () => {
-    LoginPage.forgotPassword()
-    ForgotPasswordPage.assertIsRecoveryPage()
+    loginPage.forgotPassword()
+    forgotPasswordPage.assertIsRecoveryPage()
   })
 
   context('when form is submitted', () => {
@@ -18,22 +18,22 @@ describe('Recover Password', () => {
 
     it('should show success notice with correct email', () => {
       const message = 'Enviamos um e-mail para confirmar a recuperação de senha, verifique sua caixa de entrada.'
-      ForgotPasswordPage.open()
-      ForgotPasswordPage.submit({ email })
-      ForgotPasswordPage.assertNotice({ message })
+      forgotPasswordPage.open()
+      forgotPasswordPage.submit({ email })
+      forgotPasswordPage.assertNotice({ message })
     })
 
     it('should be able to register a new password', () => {
       const message = 'Agora você já pode logar com a sua nova senha secreta.'
       const newPassword = faker.internet.password()
-      ForgotPasswordPage.open()
-      ForgotPasswordPage.submit({ email })
+      forgotPasswordPage.open()
+      forgotPasswordPage.submit({ email })
       cy.getUserToken(usersLoginFixture.email)
-      cy.get<string>('@userToken').then((token) => ResetPasswordPage.open({ token }))
-      ResetPasswordPage.submit({ newPassword, confirmation: newPassword })
-      ResetPasswordPage.assertNotice({ message })
-      LoginPage.submit({ email, password: newPassword })
-      ShaversPage.header.assertUserIsLogged({ name })
+      cy.get<string>('@userToken').then((token) => resetPasswordPage.open({ token }))
+      resetPasswordPage.submit({ newPassword, confirmation: newPassword })
+      resetPasswordPage.assertNotice({ message })
+      loginPage.submit({ email, password: newPassword })
+      shaversPage.header.assertUserIsLogged({ name })
     })
   })
 })

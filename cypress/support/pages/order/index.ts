@@ -1,7 +1,7 @@
-export class OrderPage {
-  static url = '/order'
+export const orderPage = {
+  url: '/order',
 
-  static assureIsOrderPage() {
+  assureIsOrderPage() {
     cy.contains('h1', 'PEDIDO RECEBIDO')
       .should('be.visible')
   }
