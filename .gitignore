@@ -3,3 +3,7 @@
 
 # Dependencies
 node_modules
+
+# Cypress Evidences
+cypress/screenshots
+cypress/videos
