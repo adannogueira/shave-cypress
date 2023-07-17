@@ -1,6 +1,4 @@
-import { User } from '../../../types/user'
-
-export const createUser = (user: User) => {
+export const createUser = (user: Application.User) => {
   cy.request({
     method: 'DELETE',
     url: `${Cypress.env('API_HELPER_URL')}/user/${user.email}`
