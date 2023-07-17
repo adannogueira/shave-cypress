@@ -90,6 +90,15 @@ export const apiLogin = ({ email, password }: application.User) => {
 ```
 No exemplo acima, criamos um `Cypress.Command` que executa login via api, o que ele faz é chamar o backend na rota de sessão do usuário e depois atribuir os dados recebido ao `localStorage`, tudo isso sem nenhuma interação com os elementos da tela.
 
+## Cenários de teste
+Os cenários abaixo foram escritos usando Gherkin e visam demonstrar o comportamento esperado da aplicação em cada um dos cenários descritos, os testes cobrem os cenários, garantindo a aceitação de cada um deles.
+
+- [App](./features/app.feature.md)
+- [Login](./features/login.feature.md)
+- [Order](./features/order.feature.md)
+- [Password Recovery](./features/password-recover.feature.md)
+- [Signup](./features/signup.feature.md)
+
 ## Tech
 
 Este projeto utiliza as seguintes tecnologias:
@@ -98,3 +107,5 @@ Este projeto utiliza as seguintes tecnologias:
 - [NodeJS] - Ambiente de tempo de execução Javascript utilizado pelo Cypress
 - [Typescript] - Superset do Javascript que aumenta a segurança com tipagem estática
 - [FakerJS] - Gerador de dados fictícios para ambiente de testes
+- [Express] - Framework para aplicações web
+- [Zod] - Biblioteca de validação e declaração de esquemas
