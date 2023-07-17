@@ -7,7 +7,8 @@
     "up": "docker-compose up --build --detach",
     "down": "docker-compose down",
     "start": "npm run up && npx cypress open",
-    "all": "npm run up && npx cypress run"
+    "all": "npm run up && npx cypress run",
+    "test": "npx ts-node runner.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "@faker-js/faker": "^8.0.2",
     "@types/pg": "^8.10.2",
     "cypress": "^12.17.1",
+    "cypress-tesults-reporter": "^1.4.1",
     "dotenv": "^16.3.1",
     "pg": "^8.11.1",
     "typescript": "^5.1.6"

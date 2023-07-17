@@ -13,6 +13,8 @@
 
 O foco do projeto é automatização de testes utilizando o Cypress, para tanto, é necessária a execução de uma aplicação web, alvo dos testes. Todo o conteúdo necessário para execução correta da aplicação está contido neste repositório.
 
+Obs: Para utilizar o script "test" é necessário criar uma conta no [Tesults](https://www.tesults.com/), e adicionar o Target Token ao arquivo env, caso contrário, não será possível fazer o upload dos resultados.
+
 ## Dicas
 
 #### Expressões regulares na captura de elementos:
