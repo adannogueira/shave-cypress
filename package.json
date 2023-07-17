@@ -6,7 +6,8 @@
   "scripts": {
     "up": "docker-compose up --build --detach",
     "down": "docker-compose down",
-    "start": "npm run up && npx cypress open"
+    "start": "npm run up && npx cypress open",
+    "all": "npm run up && npx cypress run"
   },
   "keywords": [],
   "author": "",
